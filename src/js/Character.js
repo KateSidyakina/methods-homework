@@ -1,7 +1,7 @@
 export const types = ['Bowerman', 'Swordsman', 'Magician', 'Daemon', 'Undead', 'Zombie'];
 
 export default class Character {
-  constructor(name, type, attack, defence, level = 1, health = 100) {
+  constructor(name, type) {
     if (typeof name === 'string' && name.length >= 2 && name.length <= 10) {
       this.name = name;
     } else {
@@ -14,10 +14,10 @@ export default class Character {
       throw new Error('ошибка type');
     }
 
-    this.health = health;
-    this.level = level;
-    this.attack = attack;
-    this.defence = defence;
+    this.health = 100;
+    this.level = 1;
+    this.attack = undefined;
+    this.defence = undefined;
   }
 
   levelUp() {
