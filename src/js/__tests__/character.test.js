@@ -2,7 +2,7 @@ import Character from '../Character';
 
 test('name is not a string test', () => {
   function testName1() {
-    return new Character(123, 'Bowerman', 25, 25);
+    return new Character(123, 'Bowerman');
   }
 
   expect(testName1).toThrow(new Error('ошибка name'));
@@ -10,7 +10,7 @@ test('name is not a string test', () => {
 
 test('name is lesser than two test', () => {
   function testName2() {
-    return new Character('n', 'Bowerman', 25, 25);
+    return new Character('n', 'Bowerman');
   }
 
   expect(testName2).toThrow(new Error('ошибка name'));
@@ -18,7 +18,7 @@ test('name is lesser than two test', () => {
 
 test('name is bigger than ten test', () => {
   function testName3() {
-    return new Character('namenamenam', 'Bowerman', 25, 25);
+    return new Character('namenamenam', 'Bowerman');
   }
 
   expect(testName3).toThrow(new Error('ошибка name'));
@@ -26,7 +26,7 @@ test('name is bigger than ten test', () => {
 
 test('type is not a string test', () => {
   function testType1() {
-    return new Character('name', 123, 25, 25);
+    return new Character('name', 123);
   }
 
   expect(testType1).toThrow(new Error('ошибка type'));
@@ -34,14 +34,14 @@ test('type is not a string test', () => {
 
 test('type is not from types test', () => {
   function testType2() {
-    return new Character('name', 'player', 25, 25);
+    return new Character('name', 'player');
   }
 
   expect(testType2).toThrow(new Error('ошибка type'));
 });
 
 test('levelUp level test', () => {
-  const result = new Character('name', 'Bowerman', 25, 25, 1, 20);
+  const result = new Character('name', 'Bowerman');
   result.levelUp();
   const expected = 2;
 
@@ -50,22 +50,26 @@ test('levelUp level test', () => {
 
 test('levelUp error test', () => {
   function testLevelUpError() {
-    return new Character('name', 'Bowerman', 25, 25, 1, 0).levelUp();
+    const character = new Character('name', 'Bowerman');
+    character.health = 0;
+    return character.levelUp();
   }
 
   expect(testLevelUpError).toThrow(new Error('нельзя повысить левел умершего'));
 });
 
 test('damage test 1', () => {
-  const result = new Character('name', 'Bowerman', 25, 25, 1, 20);
+  const result = new Character('name', 'Bowerman');
+  result.defence = 25;
   result.damage(20);
-  const expected = 5;
+  const expected = 85;
 
   expect(result.health).toBe(expected);
 });
 
 test('damage test 2', () => {
-  const result = new Character('name', 'Bowerman', 25, 25, 1, -10);
+  const result = new Character('name', 'Bowerman');
+  result.health = -10;
   result.damage(20);
   const expected = -10;
 
